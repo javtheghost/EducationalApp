@@ -1,3 +1,4 @@
+import 'package:educacionapp/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:educacionapp/util/course_card.dart';
 import 'package:educacionapp/util/category_card.dart';
@@ -61,44 +62,28 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   ),
                 )
               ),
-
-            const SizedBox(height: 25.0),
-
-            Container(
-              height: 60,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                   CategoryCard(
-                    iconImagePath: 'assets/images/courses/icprogramming.png',
-                    categoryName: 'Programming',
-                  ),
-
-                  CategoryCard(
-                    iconImagePath: 'assets/images/courses/icmath.png',
-                    categoryName: 'Math',
-                  ),
-                  
-                ],
-              ),
-            ),
-            SizedBox(height: 25.0),
-            //card
-            Expanded(
-              child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                const CourseCard(
-                  iconPathImage: 'assets/images/courses/kotlin.jpg',
-                  courseName: 'Kotlin',
-                  description: 'Desarrolla aplicaciones\nmoviles nativas',
-                  
+              GridView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
                 ),
-              ],
-            )
-          ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 24,
+                ),
+                itemBuilder: (context, index) {
+                  return CategoryCard(
+                    category: categoryList[index],
+                  );
+                },
+                itemCount: categoryList.length,
+              ),
               
-        ]),
-      );
+
+      ]),
+    );
   }
 }
